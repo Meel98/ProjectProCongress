@@ -1,5 +1,5 @@
-async function fetched(tuki) {
-    const dataj = await tuki;
+async function fetched(api) {
+    const dataj = await api;
     const datar = await dataj.json()
     return datar
 }
@@ -79,6 +79,11 @@ function lounchAtt() {
     tablaAttendance(miembrosXordenMostE, me)
     tabla(id)
 }
+
+
+
+
+//PAGE ATTENDANCE SENATE
 async function containerAttenS() {
     await Slounchertotal().then(data => { miembros = data.results[0].members })
     app3 = new Vue({
@@ -107,6 +112,8 @@ async function containerAttenS() {
     await HlouncherTotal().then(data => { miembros2 = data.results[0].members })
     appS.miembros = filtroVotos.sort(((a, b) => a.missed_votes_pct - b.missed_votes_pct)).slice(0, cuenta)
 }
+
+//PAGE ATTENDANCE HOUSE
 async function containerAttenH() {
     await HlouncherTotal().then(data => { miembros = data.results[0].members })
     app3 = new Vue({
@@ -135,6 +142,8 @@ async function containerAttenH() {
     await HlouncherTotal().then(data => { miembros2 = data.results[0].members })
     appS.miembros = filtroVotos.sort(((a, b) => a.missed_votes_pct - b.missed_votes_pct)).slice(0, cuenta)
 }
+
+//PAGE LOYALTY SENATE
 async function containerLoyalS() {
     await Slounchertotal().then(data => { miembros = data.results[0].members })
     app3 = new Vue({
@@ -163,6 +172,9 @@ async function containerLoyalS() {
     await Slounchertotal().then(data => { miembros2 = data.results[0].members })
     appS.miembros = filtroVotos.sort(((a, b) => b.votes_with_party_pct - a.votes_with_party_pct)).slice(0, cuenta)
 }
+
+
+//PAGE LOYALTY HOUSE
 async function containerLoyalH() {
     await HlouncherTotal().then(data => { miembros = data.results[0].members })
     app3 = new Vue({
@@ -246,6 +258,7 @@ function nindependists() {
     })
     return independistsArray.length
 }
+
 function nindependistspct() {
     var independistspctArray = 0
     miembros.forEach(obj => {
@@ -256,6 +269,9 @@ function nindependistspct() {
     var pct_votes = Number((independistspctArray / nindependists()).toFixed(2))
     return pct_votes
 }
+
+
+//LLAMADA A LA API DATA SENATE
 async function Slounchertotal() {
     const api_senate = await fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
         type: 'GET',
@@ -266,6 +282,8 @@ async function Slounchertotal() {
     }).then((datos) => datos.json())
     return api_senate
 }
+
+//LLAMADA A LA API HOUSE
 async function HlouncherTotal() {
     const api_house = await fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
         type: 'GET',
